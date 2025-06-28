@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Empowered Self: A Guide to Boundaries & Inner Peace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Variables from original HTML */
+        :root {
+            --heading-color: #ff19cf; /* Headings/Subheadings */
+            --accent-color: #51d2e4; /* Accent color for elements */
+            --secondary-accent-color: #FF6B6B; /* Vibrant Red */
+            --tertiary-accent-color: #FFA700; /* Vibrant Orange */
+            --section-bg-dark: #2D3142; /* Dark gray for section backgrounds */
+            --text-color-light: #FFFFFF; /* White text */
+            --text-color-dark: #ff19cf; /* Headings text color */
+
+            /* Variables from new HTML content */
+            --background: #121212; /* Darker background for consistency if body changes */
+            --text-primary: #E0E0E0; /* Primary text color for new sections */
+            --heading-pink: #FF19CF; /* Specific pink heading color for new sections */
+            --heading-cyan: #51D2E4; /* Specific cyan heading color for new sections */
+            --card-bg: #1E1E1E; /* Card background for new sections */
+            --border-color: #333; /* Border color for new sections */
+            --interactive-bg: #2a2a2a; /* Interactive background for new sections */
+        }
+
+        /* Base styles from original HTML */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Black background */
+            color: #FFFFFF; /* White text for normal content */
+            /* Add flex properties from new HTML body for overall layout */
+            display: flex;
+            flex-direction: column;
+            line-height: 1.8; /* From new HTML */
+            box-sizing: border-box; /* From new HTML */
+            overflow-x: hidden; /* From new HTML */
+            min-height: 100vh; /* Re-added for sticky footer like behavior with flex */
+        }
+
+        /* Box sizing from new HTML */
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        /* Header, H1, H2, H3, A styles from original HTML */
+        h1, h2, h3 {
+            color: var(--heading-color);
+        }
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* General styles from new HTML content */
+        h2 { font-size: 2em; color: var(--heading-cyan); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-top: 50px; }
+        h3 { font-size: 1.5em; color: var(--heading-pink); margin-top: 30px; }
+        h4 { font-size: 1.2em; color: var(--heading-cyan); font-weight: 600; margin-top: 25px; margin-bottom: 10px; }
+        p, li { font-size: 1em; }
+        .intro-p { font-size: 1.1em; color: #b0b0b0; }
+
+        /* Chart container styles from original HTML */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 280px; /* Made smaller */
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px; /* Adjusted for desktop */
+            }
+        }
+
+        /* Flowchart styles from original HTML */
+        .flowchart-step {
+            border-color: var(--accent-color);
+            color: var(--text-color-light); /* White text */
+            background-color: #1a1a1a; /* Darker step background */
+        }
+        .flowchart-arrow {
+            color: var(--accent-color);
+        }
+
+        /* Info card styles from original HTML (for bubble chart popups) */
+        .info-card {
+            position: fixed; /* Changed to absolute for better flow within parent section if needed */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            visibility: hidden;
+            background-color: var(--section-bg-dark);
+            color: var(--text-color-light);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+            max-width: 90%;
+            text-align: center;
+            border: 2px solid var(--accent-color);
+        }
+        .info-card.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+        .info-card h3 {
+            color: var(--heading-color);
+            margin-bottom: 0.5rem;
+        }
+        .info-card button {
+            background-color: var(--accent-color);
+            color: var(--section-bg-dark); /* Dark text on light accent button */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .info-card button:hover {
+            background-color: #79e9f8; /* Lighter shade on hover */
+        }
+
+        /* Fact box and STOPP explanation styles from original HTML */
+        .fact-box {
+            background-color: #1a1a1a; /* Very dark background for facts */
+            border-left: 4px solid var(--secondary-accent-color); /* Vibrant red accent */
+            padding: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #ccc; /* Slightly lighter text for facts */
+        }
+        .stopp-explanation {
+            background-color: #1a1a1a;
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        .stopp-explanation strong {
+            color: var(--accent-color);
+        }
+
+        /* Red flag item styles from original HTML */
+        .red-flag-item {
+            background-color: #1a1a1a; /* Darker background for each item */
+            border-left: 4px solid var(--secondary-accent-color); /* Red accent border */
+            padding: 1rem; /* Consistent padding around the content */
+            border-radius: 0.75rem; /* More rounded corners */
+            margin-bottom: 1rem; /* More space between items */
+            /* Removed grid for simpler inline flow as per flowchart alignment */
+            /* Display: flex and align-items: flex-start will ensure bold text and description are on the same line if space allows */
+            display: flex;
+            align-items: flex-start;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth hover effect */
+        }
+        .red-flag-item:hover {
+            transform: translateY(-3px); /* Slight lift on hover */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+        }
+        .red-flag-item strong {
+            color: var(--secondary-accent-color); /* Make the red flag name pop */
+            font-weight: 700; /* Make bold stronger */
+            flex-shrink: 0; /* Prevent bold text from wrapping too early */
+            margin-right: 0.5rem; /* Small space after the bold term */
+        }
+        /* No specific styles needed for .description-text within the grid anymore */
+        .red-flag-item span {
+            /* This targets the descriptive text which is now a direct child following strong */
+            flex-grow: 1; /* Allow the descriptive text to fill available space */
+        }
+
+
+        /* Enhanced heading for the red flags section */
+        .red-flags-heading {
+            background-color: var(--heading-color); /* Use the heading color as background */
+            color: #FFFFFF; /* White text for the heading */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem; /* Rounded corners */
+            text-align: center;
+            margin-bottom: 1.5rem; /* More space below heading */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+        }
+
+        /* New aesthetic info card section styling (from first HTML) */
+        .end-note-section {
+            background: linear-gradient(90deg, var(--heading-pink), var(--heading-cyan));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .end-note-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+        }
+        .end-note-section h3 {
+            color: white;
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-top: 0;
+        }
+        .end-note-section p {
+            font-size: 1.15em;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Worksheet and interactive element styles (from first HTML) */
+        .worksheet-section, .info-box {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .worksheet-prompt {
+            font-weight: 600;
+            color: var(--heading-cyan);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .worksheet-input {
+            width: 100%;
+            box-sizing: border-box;
+            background-color: var(--interactive-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--text-primary);
+            font-size: 1em;
+            margin-top: 5px;
+            min-height: 80px;
+            resize: vertical;
+        }
+        .worksheet-input:focus {
+            outline: none;
+            border-color: var(--heading-pink);
+            box-shadow: 0 0 8px rgba(255, 25, 207, 0.3);
+        }
+        .script-item {
+            margin-bottom: 20px;
+        }
+
+        /* Feedback text styles (from first HTML) */
+        .feedback-text {
+            font-weight: bold;
+        }
+        .feedback-text.correct {
+            color: limegreen;
+        }
+        .feedback-text.incorrect {
+            color: red;
+        }
+
+        /* Aesthetic Button Styles (from first HTML) */
+        .aesthetic-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(90deg, var(--heading-pink), var(--heading-cyan));
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .aesthetic-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(90deg, var(--heading-cyan), var(--heading-pink));
+        }
+
+        /* Remove default bullet dots for checklist (from first HTML) */
+        #takeaway-checklist {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        #takeaway-checklist li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <header class="bg-black text-center p-8 md:p-12 shadow-md border-b-2" style="border-color: var(--accent-color);">
+        <h1 class="text-4xl md:text-6xl font-black uppercase" style="color: var(--heading-color);">The <span style="color: var(--accent-color);">Empowered</span> Self</h1>
+        <p class="text-lg md:text-xl mt-4 max-w-3xl mx-auto" style="color: var(--text-color-light);">An interactive guide to building healthy boundaries, navigating relationships, and cultivating unshakable inner peace.</p>
+    </header>
+
+    <main class="p-4 md:p-8 flex-grow"> <!-- Added flex-grow to main for proper footer positioning -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <section id="blueprint" class="lg:col-span-2 rounded-lg shadow-md p-6" style="background-color: var(--section-bg-dark);">
+                <h2 class="text-3xl font-bold text-center mb-4">The Blueprint of Boundaries</h2>
+                <p class="text-center max-w-3xl mx-auto mb-8" style="color: var(--text-color-light);">Boundaries are not walls to keep others out; they are the lines you draw to define who you are, what you stand for, and how you expect to be treated. They are a radical act of self-care and the foundation of all healthy relationships.</p>
+                
+                <div class="fact-box">
+                    <p>Psychological research indicates that people with clear boundaries experience lower stress levels and higher self-esteem. They are also perceived as more trustworthy by others!</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="border-2 border-dashed rounded-lg p-4" style="border-color: var(--accent-color);">
+                        <h3 class="text-xl font-bold" style="color: var(--accent-color);">Physical</h3>
+                        <p class="mt-2 text-sm" style="color: var(--text-color-light);">Your space, your body, your touch preferences. <br> <span class="font-bold">Example:</span> "I'm not a hugger, but I appreciate the thought."</p>
+                    </div>
+                    <div class="border-2 border-dashed rounded-lg p-4" style="border-color: var(--secondary-accent-color);">
+                        <h3 class="text-xl font-bold" style="color: var(--secondary-accent-color);">Emotional</h3>
+                        <p class="mt-2 text-sm" style="color: var(--text-color-light);">Your feelings are valid. You decide what to share and what is off-limits. <br> <span class="font-bold">Example:</span> "I'm not comfortable discussing this topic right now."</p>
+                    </div>
+                    <div class="border-2 border-dashed rounded-lg p-4" style="border-color: var(--tertiary-accent-color);">
+                        <h3 class="text-xl font-bold" style="color: var(--tertiary-accent-color);">Mental & Time</h3>
+                        <p class="mt-2 text-sm" style="color: var(--text-color-light);">Your thoughts, beliefs, and time are valuable resources. <br> <span class="font-bold">Example:</span> "I can't take on new projects, my schedule is full."</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="spectrum" class="rounded-lg shadow-md p-6" style="background-color: var(--section-bg-dark);">
+                <h2 class="text-2xl font-bold text-center mb-4">Who Needs Your Strongest Boundaries?</h2>
+                <p class="text-center text-sm mb-4" style="color: var(--text-color-light);">Certain behaviors drain your energy more than others. Recognizing these patterns allows you to proactively protect your peace. This chart shows the relative emotional drain of interacting with different personality types without firm boundaries.</p>
+                <div class="chart-container">
+                    <canvas id="toxicTypesChart"></canvas>
+                </div>
+            </section>
+
+            <section id="dynamics" class="rounded-lg shadow-md p-6" style="background-color: var(--section-bg-dark);">
+                <h2 class="text-2xl font-bold text-center mb-4">The Relationship Spectrum</h2>
+                    <p class="text-center text-sm mb-4" style="color: var(--text-color-light);">Relationships exist on a spectrum. Healthy dynamics energize you, while unhealthy ones deplete you. Here's how to spot the difference.</p>
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-green-400 text-center mb-2">Healthy ✔</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="p-2 rounded-lg" style="background-color: #1a3b1a;">Open Communication</li>
+                            <li class="p-2 rounded-lg" style="background-color: #1a3b1a;">Mutual Respect</li>
+                            <li class="p-2 rounded-lg" style="background-color: #1a3b1a;">Trust & Honesty</li>
+                            <li class="p-2 rounded-lg" style="background-color: #1a3b1a;">Independence</li>
+                            <li class="p-2 rounded-lg" style="background-color: #1a3b1a;">Equality & Support</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-red-400 text-center mb-2">Unhealthy ✖</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="p-2 rounded-lg" style="background-color: #4d2d2d;">Control & Jealousy</li>
+                            <li class="p-2 rounded-lg" style="background-color: #4d2d2d;">Constant Criticism</li>
+                            <li class="p-2 rounded-lg" style="background-color: #4d2d2d;">Dishonesty & Blame</li>
+                            <li class="p-2 rounded-lg" style="background-color: #4d2d2d;">Isolation</li>
+                            <li class="p-2 rounded-lg" style="background-color: #4d2d2d;">Feeling Drained</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fact-box">
+                    <p>A study by Dr. John Gottman found that healthy relationships have a 5:1 ratio of positive to negative interactions.</p>
+                </div>
+            </section>
+            
+            <section id="redflags" class="lg:col-span-2 rounded-lg shadow-md p-6" style="background-color: var(--section-bg-dark);">
+                <h2 class="text-3xl font-bold text-center mb-2">Navigating Red Flags</h2>
+                <p class="text-center max-w-3xl mx-auto mb-6" style="color: var(--text-color-light);">Red flags are not stop signs, but they are crucial warning signs. They signal a need for caution, communication, and clear boundaries. This chart illustrates the danger dimensions of common red flags.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <!-- Enhanced heading styling -->
+                        <h3 class="text-xl font-bold mb-4 red-flags-heading">
+                            Spotting Relationship Red Flags
+                        </h3>
+                        <!-- Bulleted list with enhanced item styling -->
+                        <ul class="list-none pl-0 space-y-3 text-sm mb-4" style="color: var(--text-color-light);">
+                            <li class="red-flag-item">
+                                <strong>Gaslighting:</strong> 
+                                <span>They make you feel crazy or doubt your own mind.</span>
+                            </li>
+                            <li class="red-flag-item">
+                                <strong>Jealousy:</strong> 
+                                <span>They are too possessive and get mad if you interact with others.</span>
+                            </li>
+                            <li class="red-flag-item">
+                                <strong>Constant Criticism:</strong> 
+                                <span>They always put you down or say negative things about you.</span>
+                            </li>
+                            <li class="red-flag-item">
+                                <strong>Controlling Behavior:</strong> 
+                                <span>They try to tell you what to do or limit your choices.</span>
+                            </li>
+                            <li class="red-flag-item">
+                                <strong>Emotional Manipulation:</strong> 
+                                <span>They play games with your feelings to get what they want.</span>
+                            </li>
+                        </ul>
+                        <div class="chart-container">
+                            <canvas id="redFlagsChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4" style="color: limegreen;">Your Action Plan Flowchart</h3>
+                        <p class="text-sm mb-4" style="color: var(--text-color-light);">When you spot a red flag, don't ignore it. Follow a structured response to protect yourself and address the behavior constructively.</p>
+                        <div class="space-y-4">
+                            <div class="flowchart-step border-l-4 p-3 rounded-r-lg"><strong>1. Identify:</strong> Acknowledge the specific behavior. Don't make excuses for it.</div>
+                            <div class="flex justify-center"><span class="flowchart-arrow text-2xl font-bold">↓</span></div>
+                            <div class="flowchart-step border-l-4 p-3 rounded-r-lg"><strong>2. Pause & Regulate:</strong> Take a breath. Use the STOPP technique*. Do not react impulsively. Your power is in your response.</div>
+                            <div class="flex justify-center"><span class="flowchart-arrow text-2xl font-bold">↓</span></div>
+                            <div class="flowchart-step border-l-4 p-3 rounded-r-lg"><strong>3. Communicate (if safe):</strong> Use an "I" statement. "I feel [emotion] when [behavior] occurs. I need [specific change]."</div>
+                            <div class="flex justify-center"><span class="flowchart-arrow text-2xl font-bold">↓</span></div>
+                            <div class="flowchart-step border-l-4 p-3 rounded-r-lg"><strong>4. Set a Consequence:</strong> "If this continues, I will [action, e.g., end the conversation, leave]."</div>
+                            <div class="flex justify-center"><span class="flowchart-arrow text-2xl font-bold">↓</span></div>
+                            <div class="flowchart-step border-l-4 p-3 rounded-r-lg"><strong>5. Follow Through:</strong> Your actions teach people how to treat you. Enforce the boundary you set.</div>
+                        </div>
+                        <div class="stopp-explanation">
+                            <strong>*STOPP Technique:</strong> A quick mindfulness tool for emotional regulation.
+                            <ul>
+                                <li><strong>S</strong>top! (Pause for a moment)</li>
+                                <li><strong>T</strong>ake a Breath (Notice your breathing)</li>
+                                <li><strong>O</strong>bserve (Identify thoughts, feelings, sensations)</li>
+                                <li><strong>P</strong>ull Back / Put in Some Perspective (Consider context, challenge interpretations)</li>
+                                <li><strong>P</strong>ractice What Works / Proceed (Choose a healthy response)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="communication" class="rounded-lg shadow-md p-6" style="background-color: var(--section-bg-dark);">
+                <!-- Heading made easier to understand -->
+                <h2 class="text-2xl font-bold text-center mb-4">Be Heard: Speak Assertively</h2>
+                <!-- Description made easier to understand -->
+                <p class="text-center text-sm mb-4" style="color: var(--text-color-light);">
+                    Assertive communication means being clear, confident, and respectful. It helps you set boundaries effectively. This chart shows key elements of assertive communication. The bigger a slice, the more important that part is.
+                </p>
+                <!-- Chart container size adjusted in CSS (chart-container class) -->
+                <div class="chart-container">
+                    <canvas id="communicationDonutChart"></canvas>
+                </div>
+                <div class="fact-box">
+                    <p>NLP (Neuro-Linguistic Programming) suggests that mirroring body language can subconsciously build rapport, making communication smoother.</p>
+                </div>
+            </section>
+            
+            <section class="rounded-lg shadow-md p-6" style="background-color: var(--section-bg-dark);">
+                    <h2 class="text-2xl font-bold text-center mb-4">Ready-Made NLP Scripts</h2>
+                    <p class="text-center text-sm mb-4" style="color: var(--text-color-light);">Sometimes you need the right words. Here are scripts for common toxic situations, inspired by NLP and CBT techniques.</p>
+                    <div class="space-y-3">
+                        <div class="p-3 rounded-lg" style="background-color: #1a1a1a;">
+                            <h4 class="font-bold">For Guilt-Tripping:</h4>
+                            <p class="text-sm" style="color: var(--text-color-light);">"I understand you're disappointed, but I will not be made to feel guilty for my decision. My choice stands."</p>
+                        </div>
+                        <div class="p-3 rounded-lg" style="background-color: #1a1a1a;">
+                            <h4 class="font-bold">For Constant Criticism:</h4>
+                            <p class="text-sm" style="color: var(--text-color-light);">"I am open to constructive feedback, but I will not tolerate being constantly belittled. Please speak to me respectfully."</p>
+                        </div>
+                        <div class="p-3 rounded-lg" style="background-color: #1a1a1a;">
+                            <h4 class="font-bold">For Passive Aggression:</h4>
+                            <p class="text-sm" style="color: var(--text-color-light);">"I'm sensing there's more to what you're saying. Can you please be direct with me about what's on your mind?"</p>
+                        </div>
+                        <div class="p-3 rounded-lg" style="background-color: #1a1a1a;">
+                            <h4 class="font-bold">For a Disempowered Narrator:</h4>
+                            <p class="text-sm" style="color: var(--text-color-light);">"It sounds like you're in a tough spot. I am here to listen, but I cannot solve this for you. What do you think you can do?"</p>
+                        </div>
+                    </div>
+            </section>
+
+            <section id="control" class="lg:col-span-2 rounded-lg shadow-md p-6" style="background-color: var(--section-bg-dark);">
+                <h2 class="text-3xl font-bold text-center mb-4">Mastering Your Inner World</h2>
+                    <p class="text-center max-w-3xl mx-auto mb-8" style="color: var(--text-color-light);">True power isn't about controlling others; it's about mastering yourself. The Stoic "Dichotomy of Control" is your guide. Focus your energy where it creates real change: within.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="text-center p-6 rounded-lg" style="background-color: var(--accent-color); color: var(--section-bg-dark);">
+                        <h3 class="text-2xl font-bold">IN YOUR CONTROL</h3>
+                        <ul class="mt-4 space-y-2 text-left list-disc list-inside">
+                            <li>Your words & actions</li>
+                            <li>Your thoughts & attitude</li>
+                            <li>Your choices & effort</li>
+                            <li>Your boundaries</li>
+                            <li>How you respond to emotions</li>
+                            <li>Who you give your time to</li>
+                        </ul>
+                    </div>
+                    <div class="text-center p-6 rounded-lg" style="background-color: var(--secondary-accent-color); color: var(--section-bg-dark);">
+                        <h3 class="text-2xl font-bold">OUT OF YOUR CONTROL</h3>
+                        <ul class="mt-4 space-y-2 text-left list-disc list-inside">
+                            <li>Others' actions & words</li>
+                            <li>Others' opinions of you</li>
+                            <li>Others' emotions & reactions</li>
+                            <li>The past & the future</li>
+                            <li>What others think or believe</li>
+                            <li>Their choices and mistakes</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fact-box">
+                    <p>Julian Rotter's concept of Locus of Control suggests that people with an 'internal locus' (believing they control their own destiny) tend to be more resilient and achieve more.</p>
+                </div>
+            </section>
+
+            <section id="peace" class="lg:col-span-2 rounded-lg shadow-md p-6" style="background-color: var(--section-bg-dark);">
+                <h2 class="text-3xl font-bold text-center mb-4">Strategies for Inner Peace & Resilience</h2>
+                <p class="text-center max-w-3xl mx-auto mb-6" style="color: var(--text-color-light);">Cultivating inner calm is an active practice. Tap on the bubbles below to reveal various strategies for building long-term resilience and peace. The size of the bubble suggests its potential impact.</p>
+                <div class="chart-container h-96 md:h-[500px] max-h-[500px]">
+                    <canvas id="peaceStrategiesChart"></canvas>
+                </div>
+                <div id="infoCardHolder" style="margin-top: 1rem;"></div>
+            </section>
+            
+            <section id="wisdom" class="lg:col-span-2 rounded-lg shadow-md p-6" style="background-color: var(--section-bg-dark);">
+                <h2 class="text-3xl font-bold text-center mb-6">Wisdom from the Experts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="border-l-4 p-4 rounded-r-lg" style="border-color: var(--accent-color); background-color: #1a1a1a;">
+                        <blockquote class="text-sm italic">"The most compassionate people are also the most boundaried."</blockquote>
+                        <cite class="mt-2 block font-bold not-italic text-right" style="color: var(--accent-color);">- Brené Brown</cite>
+                    </div>
+                    <div class="border-l-4 p-4 rounded-r-lg" style="border-color: var(--secondary-accent-color); background-color: #1a1a1a;">
+                        <blockquote class="text-sm italic">"If a boundary leads to a relationship ending, it worked. Its purpose is to protect your mental health."</blockquote>
+                        <cite class="mt-2 block font-bold not-italic text-right" style="color: var(--secondary-accent-color);">- Mark Manson</cite>
+                    </div>
+                    <div class="border-l-4 p-4 rounded-r-lg" style="border-color: var(--tertiary-accent-color); background-color: #1a1a1a;">
+                        <blockquote class="text-sm italic">"What you avoid controls you! Facing discomfort is the key to personal and professional growth."</blockquote>
+                        <cite class="mt-2 block font-bold not-italic text-right" style="color: var(--tertiary-accent-color);">- Alex Hormozi</cite>
+                    </div>
+                    <div class="border-l-4 p-4 rounded-r-lg" style="border-color: var(--heading-color); background-color: #1a1a1a;">
+                        <blockquote class="text-sm italic">"It's not anyone else's job to uphold your boundaries. It's up to you. If your boundaries are crossed, it's you crossing them."</blockquote>
+                        <cite class="mt-2 block font-bold not-italic text-right" style="color: var(--heading-color);">- Gabby Bernstein</cite>
+                    </div>
+                    <div class="border-l-4 p-4 rounded-r-lg" style="background-color: #1a1a1a;">
+                        <blockquote class="text-sm italic">"Boundaries focus on your needs & triggers, not on controlling others. They are acts of self-care."</blockquote>
+                        <cite class="mt-2 block font-bold not-italic text-right" style="color: var(--accent-color);">- Jay Shetty</cite>
+                    </div>
+                    <div class="border-l-4 p-4 rounded-r-lg" style="border-color: var(--secondary-accent-color); background-color: #1a1a1a;">
+                            <blockquote class="text-sm italic">"Win through your actions, never through argument. Consistent, boundary-enforcing actions are your power."</blockquote>
+                            <cite class="mt-2 block font-bold not-italic text-right" style="color: var(--secondary-accent-color);">- Robert Greene</cite>
+                    </div>
+                </div>
+                <div class="fact-box">
+                    <p>Stoic philosophy, practiced for over 2,000 years, emphasizes focusing only on what is within your control for ultimate tranquility.</p>
+                </div>
+            </section>
+
+            <!-- INTERACTIVE TAKEAWAYS SECTION (Inserted from first HTML) -->
+            <section id="interactive-takeaways" class="lg:col-span-2 rounded-lg shadow-md p-6" style="background-color: var(--card-bg); margin-top: 30px;">
+                <h2 class="text-3xl font-bold text-center mb-6" style="color: var(--heading-cyan);">Your Empowered Self: Ready for What's Next?</h2>
+                <p class="intro-p text-center mb-8">You've unlocked powerful insights about boundaries and yourself. Let's quickly check in with your journey and boost your confidence for what's ahead!</p>
+
+                <!-- Your Empowerment Pulse Check (Checklist) -->
+                <div class="worksheet-section">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--heading-pink);">Your Empowerment Pulse Check</h3>
+                    <p class="intro-p mb-4">How are you feeling about your journey so far? Check the boxes that speak to your truth:</p>
+                    <ul id="takeaway-checklist" class="list-none p-0 space-y-3">
+                        <li class="flex items-center">
+                            <input type="checkbox" id="check-pulse-1" class="form-checkbox h-5 w-5 mr-3" style="accent-color: var(--heading-cyan);">
+                            <label for="check-pulse-1" class="text-base cursor-pointer">I feel more aware of my personal needs and limits.</label>
+                        </li>
+                        <li class="flex items-center">
+                            <input type="checkbox" id="check-pulse-2" class="form-checkbox h-5 w-5 mr-3" style="accent-color: var(--heading-cyan);">
+                            <label for="check-pulse-2" class="text-base cursor-pointer">I'm starting to trust my intuition more in relationships.</label>
+                        </li>
+                        <li class="flex items-center">
+                            <input type="checkbox" id="check-pulse-3" class="form-checkbox h-5 w-5 mr-3" style="accent-color: var(--heading-cyan);">
+                            <label for="check-pulse-3" class="text-base cursor-pointer">I feel a quiet strength growing within me.</label>
+                        </li>
+                        <li class="flex items-center">
+                            <input type="checkbox" id="check-pulse-4" class="form-checkbox h-5 w-5 mr-3" style="accent-color: var(--heading-cyan);">
+                            <label for="check-pulse-4" class="text-base cursor-pointer">I'm excited to apply what I've learned to my daily life.</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Words of Power for Your Soul (Fill-in-the-blank) -->
+                <div class="worksheet-section mt-8">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--heading-pink);">Words of Power for Your Soul</h3>
+                    <p class="intro-p mb-4">Complete these powerful statements with your own words to make them truly yours. There are no "wrong" answers here!</p>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="mb-2">My peace is my ultimate:</p>
+                            <input type="text" id="blank-affirmation-1" class="worksheet-input w-full" placeholder="______">
+                            <button class="check-affirmation-btn aesthetic-btn mt-2 py-2 px-4 text-sm">Affirm My Truth</button>
+                            <span class="feedback-text text-sm ml-2"></span>
+                        </div>
+                        <div>
+                            <p class="mb-2">I choose to treat myself with the same I offer others:</p>
+                            <input type="text" id="blank-affirmation-2" class="worksheet-input w-full" placeholder="______">
+                            <button class="check-affirmation-btn aesthetic-btn mt-2 py-2 px-4 text-sm">Affirm My Truth</button>
+                            <span class="feedback-text text-sm ml-2"></span>
+                        </div>
+                        <div>
+                            <p class="mb-2">My voice is powerful when I speak with and kindness:</p>
+                            <input type="text" id="blank-affirmation-3" class="worksheet-input w-full" placeholder="______">
+                            <button class="check-affirmation-btn aesthetic-btn mt-2 py-2 px-4 text-sm">Affirm My Truth</button>
+                            <span class="feedback-text text-sm ml-2"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Your Inner Compass: Match the Feeling (Matching Column) -->
+                <div class="worksheet-section mt-8">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--heading-pink);">Your Inner Compass: Match the Feeling</h3>
+                    <p class="intro-p mb-4">Which boundary helps protect your most important feelings? Choose the best fit from the dropdowns.</p>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex flex-col items-start">
+                            <p class="flex-shrink-0 mb-2">1. Feeling Safe & Private:</p>
+                            <div class="flex w-full items-center space-x-2">
+                                <select class="match-compass-select worksheet-input flex-grow" data-correct="Physical">
+                                    <option value="">What type?</option>
+                                    <option value="Physical">Physical</option>
+                                    <option value="Emotional">Emotional</option>
+                                    <option value="Mental">Mental</option>
+                                    <option value="Time">Time</option>
+                                </select>
+                                <span class="feedback-text text-sm"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-start">
+                            <p class="flex-shrink-0 mb-2">2. Feeling Calm & Respected:</p>
+                            <div class="flex w-full items-center space-x-2">
+                                <select class="match-compass-select worksheet-input flex-grow" data-correct="Emotional">
+                                    <option value="">What type?</option>
+                                    <option value="Physical">Physical</option>
+                                    <option value="Emotional">Emotional</option>
+                                    <option value="Mental">Mental</option>
+                                    <option value="Time">Time</option>
+                                </select>
+                                <span class="feedback-text text-sm"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-start">
+                            <p class="flex-shrink-0 mb-2">3. Feeling Focused & Free:</p>
+                            <div class="flex w-full items-center space-x-2">
+                                <select class="match-compass-select worksheet-input flex-grow" data-correct="Mental/Time">
+                                    <option value="">What type?</option>
+                                    <option value="Physical">Physical</option>
+                                    <option value="Emotional">Emotional</option>
+                                    <option value="Mental">Mental</option>
+                                    <option value="Time">Time</option>
+                                </select>
+                                <span class="feedback-text text-sm"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="check-compass-btn" class="aesthetic-btn mt-6">See My Matches</button>
+                    <p id="overall-compass-feedback" class="feedback-text text-center mt-4"></p>
+                </div>
+
+                <!-- NLP-toned ending -->
+                <div class="end-note-section">
+                    <h3 class="font-extrabold">You Are the Architect of Your Peace.</h3>
+                    <p>Feel the shift within you. This isn't just about boundaries; it's about reclaiming your power, honoring your worth, and stepping into a life that truly aligns with your highest self. Breathe deep, trust your intuition, and know that you are capable of creating the empowered relationships you deserve. Keep moving forward, one boundary at a time.</p>
+                </div>
+
+            </section>
+            <!-- END NEW INTERACTIVE TAKEAWAYS SECTION -->
+
+        </div>
+    </main>
+
+    <footer class="text-center p-6 mt-0 pb-0 bg-black shadow-inner border-t-2" style="border-color: var(--accent-color);">
+        <p style="color: var(--text-color-light);">Your journey to an empowered self is continuous. Revisit, reflect, and keep practicing.</p>
+        <div class="mt-4 text-sm" style="color: var(--text-color-light);">
+            Follow Empowered by Sania:
+            <a href="https://www.youtube.com/@EmpoweredbySania" target="_blank" class="mx-2" style="color: var(--accent-color);">YouTube</a> |
+            <a href="https://www.instagram.com/empowered.bysania/" target="_blank" class="mx-2" style="color: var(--accent-color);">Instagram</a>
+        </div>
+        <p class="text-xs text-gray-500 mt-2 pb-4">© 2025 Empowered by Sania Media. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Utility function to wrap text for chart labels
+            const wrapText = (text, maxChars) => {
+                if (typeof text !== 'string' || text.length <= maxChars) {
+                    return text;
+                }
+                const words = text.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxChars && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine.length > 0) {
+                    lines.push(currentLine);
+                }
+                return lines;
+            };
+            
+            // Callback for Chart.js tooltips to display full label if wrapped
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+            
+            // Common Chart.js options
+            const commonChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 10,
+                                color: '#FFFFFF' // White labels for legend
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#FFFFFF' }, // White ticks
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' } // Light grid lines
+                    },
+                    y: {
+                        ticks: { color: '#FFFFFF' }, // White ticks
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' } // Light grid lines
+                    }
+                }
+            };
+            
+            // Chart initialization: Toxic Types Bar Chart
+            const toxicTypesCtx = document.getElementById('toxicTypesChart').getContext('2d');
+            new Chart(toxicTypesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Emotional Manipulator', 'Narcissist', 'Energy Drainer', 'Disempowered Narrator', 'Guilt-Tripper'].map(label => wrapText(label, 16)),
+                    datasets: [{
+                        label: 'Relative Emotional Drain',
+                        data: [90, 85, 75, 70, 65],
+                        backgroundColor: ['#FF19CF', '#51D2E4', '#FF6B6B', '#FFA700', '#9B59B6'], // Use new color scheme
+                        borderColor: '#000000', // Black border for contrast
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...commonChartOptions,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+
+            // Chart initialization: Red Flags Radar Chart
+            const redFlagsCtx = document.getElementById('redFlagsChart').getContext('2d');
+            new Chart(redFlagsCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Controlling Behavior', 'Gaslighting', 'Constant Criticism', 'Emotional Manipulation', 'Jealousy'].map(label => wrapText(label, 16)),
+                    datasets: [{
+                        label: 'Danger Profile',
+                        data: [8, 9, 7, 9, 6],
+                        backgroundColor: 'rgba(255, 25, 207, 0.2)', // Heading color with transparency
+                        borderColor: '#ff19cf', // Heading color
+                        pointBackgroundColor: '#ff19cf',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#ff19cf'
+                    }]
+                },
+                options: {
+                    ...commonChartOptions,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' }, // Light grid lines
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }, // Light grid lines
+                            pointLabels: { font: { size: 11, color: '#FFFFFF' } }, // White point labels
+                            suggestedMin: 0,
+                            suggestedMax: 10,
+                            ticks: {
+                                color: '#FFFFFF', // White tick labels
+                                backdropColor: 'rgba(0,0,0,0)' // Transparent background for ticks
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+
+            // Chart initialization: Communication Donut Chart
+            const communicationDonutCtx = document.getElementById('communicationDonutChart').getContext('2d');
+            if (communicationDonutCtx) {
+                new Chart(communicationDonutCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [
+                            'Use "I" Statements',
+                            'Listen Actively',
+                            'Be Clear on Needs',
+                            'Speak Firmly',
+                            'State Consequences'
+                        ],
+                        datasets: [{
+                            label: 'Assertiveness Parts',
+                            data: [30, 25, 20, 15, 10],
+                            backgroundColor: ['#51D2E4', '#FF19CF', '#FF6B6B', '#FFA700', '#9B59B6'], // Your color scheme
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        ...commonChartOptions,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#e2e8f0', // Legend label color
+                                    font: {
+                                        size: 12
+                                    },
+                                    boxWidth: 10,
+                                    padding: 10
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            }
+                        },
+                        cutout: '78%',
+                        layout: {
+                            padding: {
+                                top: 0,
+                                bottom: 20,
+                                left: 0,
+                                right: 0
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart Initialization: Peace Strategies Bubble Chart
+            const peaceStrategiesCtx = document.getElementById('peaceStrategiesChart').getContext('2d');
+            const infoCardHolder = document.getElementById('infoCardHolder');
+
+            function showInfoCard(title, description) {
+                infoCardHolder.innerHTML = `
+                    <div id="infoCard" style="
+                        background-color: var(--section-bg-dark);
+                        color: var(--text-color-light);
+                        padding: 2rem;
+                        border-radius: 0.75rem;
+                        border: 2px solid var(--accent-color);
+                        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+                        max-width: 100%;
+                        text-align: center;
+                        margin-top: 1rem;
+                    ">
+                        <h3 class="text-xl font-bold" style="color: var(--heading-color); margin-bottom: 0.5rem;">${title}</h3>
+                        <p class="text-sm">${description}</p>
+                        <button id="closeCard" style="
+                            background-color: var(--accent-color);
+                            color: var(--section-bg-dark);
+                            padding: 0.5rem 1rem;
+                            border-radius: 0.5rem;
+                            margin-top: 1rem;
+                            font-weight: bold;
+                            cursor: pointer;
+                        ">Got It!</button>
+                    </div>
+                `;
+
+                const card = document.getElementById('infoCard');
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                document.getElementById('closeCard').addEventListener('click', () => {
+                    card.remove();
+                });
+            }
+
+            const peaceStrategiesData = {
+                datasets: [{
+                    label: 'Mindfulness & Meditation',
+                    data: [{ x: 5, y: 4.5, r: 25, title: 'Mindfulness & Meditation', description: 'Daily practice improves focus and self-awareness, reducing impulsive reactions and promoting inner calm.' }],
+                    backgroundColor: '#51D2E4' // Accent color
+                }, {
+                    label: 'Consistent Self-Care',
+                    data: [{ x: 4, y: 3.5, r: 22, title: 'Consistent Self-Care', description: 'Prioritizing rest, nutrition, and activities that replenish your energy is vital for sustained well-being.' }], // Adjusted y-coordinate
+                    backgroundColor: '#FF6B6B' // Secondary accent
+                }, {
+                    label: 'Journaling & Reflection',
+                    data: [{ x: 7, y: 4, r: 18, title: 'Journaling & Reflection', description: 'Regularly writing down thoughts and feelings helps process emotions, gain clarity, and track progress.' }],
+                    backgroundColor: '#FFA700' // Tertiary accent
+                },{
+                    label: 'Positive Social Connections',
+                    data: [{ x: 3, y: 4.5, r: 20, title: 'Positive Social Connections', description: 'Surrounding yourself with supportive individuals provides validation, comfort, and a sense of belonging.' }],
+                    backgroundColor: '#9B59B6' // A purple shade
+                }, {
+                    label: 'Physical Exercise',
+                    data: [{ x: 3, y: 3, r: 17, title: 'Physical Exercise', description: 'Engaging in physical activity releases endorphins, reduces stress, and boosts overall mood and resilience.' }],
+                    backgroundColor: '#370617' // A darker shade for contrast
+                }, {
+                    label: 'Limiting Exposure to Negativity',
+                    data: [{ x: 7, y: 4.5, r: 15, title: 'Limiting Exposure to Negativity', description: 'Consciously reducing time spent with toxic people or engaging with negative media protects your mental space.' }],
+                    backgroundColor: '#004B49' // A dark teal
+                }]
+            };
+
+            const peaceStrategiesChart = new Chart(peaceStrategiesCtx, {
+                type: 'bubble',
+                data: peaceStrategiesData,
+                options: {
+                    ...commonChartOptions,
+                    scales: {
+                        x: { display: false },
+                        y: { display: false }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top', // Legend position set to top
+                            labels: {
+                                color: '#FFFFFF' // White labels for legend
+                            }
+                        },
+                        tooltip: { enabled: false } // Disable default tooltip for custom interactivity
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const element = elements[0];
+                            const datasetIndex = element.datasetIndex;
+                            const dataIndex = element.index;
+                            const clickedData = peaceStrategiesData.datasets[datasetIndex].data[dataIndex];
+                            
+                            showInfoCard(clickedData.title, clickedData.description);
+
+                        }
+                    }
+                }
+            });
+
+            // Interactive Takeaways Logic from the first HTML snippet
+            // Fill-in-the-blank logic (Affirmations)
+            document.querySelectorAll('.check-affirmation-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const parentDiv = this.closest('div');
+                    const inputElement = parentDiv.querySelector('input[type="text"]');
+                    const feedbackSpan = this.nextElementSibling;
+
+                    if (inputElement && inputElement.value.trim() !== '') {
+                        feedbackSpan.textContent = "Great insight! Keep affirming your strength!"; // Changed 'power' to 'strength'
+                        feedbackSpan.className = 'feedback-text text-sm ml-2 correct';
+                    } else {
+                        feedbackSpan.textContent = "Take a moment to fill this in. Your words matter!";
+                        feedbackSpan.className = 'feedback-text text-sm ml-2';
+                    }
+                });
+            });
+
+            // Match the column logic (Inner Compass)
+            document.getElementById('check-compass-btn').addEventListener('click', function() {
+                let allAnswered = true;
+                const selectElements = document.querySelectorAll('.match-compass-select');
+                const overallFeedback = document.getElementById('overall-compass-feedback');
+                let answeredCount = 0;
+
+                selectElements.forEach(select => {
+                    const feedbackSpan = select.nextElementSibling;
+                    if (select.value === '') {
+                        feedbackSpan.textContent = "Choose an option.";
+                        feedbackSpan.className = 'feedback-text text-sm ml-2';
+                        allAnswered = false;
+                    } else {
+                        feedbackSpan.textContent = "Nice reflection!";
+                        feedbackSpan.className = 'feedback-text text-sm ml-2 correct';
+                        answeredCount++;
+                    }
+                });
+
+                if (allAnswered) {
+                    overallFeedback.textContent = `Wonderful! You've reflected on all aspects of your inner compass.`;
+                    overallFeedback.className = 'feedback-text text-center mt-4 correct';
+                } else if (answeredCount > 0) {
+                    overallFeedback.textContent = `You've reflected on ${answeredCount} out of ${selectElements.length} aspects. Keep exploring your inner compass!`;
+                    overallFeedback.className = 'feedback-text text-center mt-4';
+                } else {
+                    overallFeedback.textContent = "Start connecting your feelings to your boundary types!";
+                    overallFeedback.className = 'feedback-text text-center mt-4';
+                }
+            });
+
+            // Ensure main content is visible. This was from the first snippet, adapted for the combined structure.
+            // The main element should already be visible by default as it's part of the static HTML.
+            // This line is primarily for ensuring the interactive section, if dynamically loaded, is displayed.
+            // For this merge, the section is statically inserted, so this line might be redundant but harmless.
+            const mainContentElement = document.querySelector('main'); // Targeting the main element
+            if (mainContentElement) {
+                mainContentElement.style.display = 'block'; // Or 'flex' if the main content itself needs to be a flex container
+            }
+
+        });
+    </script>
+</body>
+</html>
